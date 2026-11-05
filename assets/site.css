@@ -64,3 +64,53 @@ img{max-width:100%}
 .pit-sludge-side{fill-opacity:.22}
 .pit-xray{fill-opacity:.22}
 .pit-water{fill-opacity:.14}
+
+/* ===== Слои схемы: низ / верх ===== */
+.ctl-layers{padding-bottom:4px}
+.ctl-label{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--anatomy-muted);margin-right:4px}
+.chip i[data-sw="lo"]{background:repeating-linear-gradient(90deg,var(--c-drain) 0 3px,transparent 3px 5px)}
+.chip i[data-sw="hi"]{background:var(--brand)}
+.iso-stage [data-ly]{transition:opacity .45s var(--anatomy-ease)}
+.iso-stage[data-layer="lo"] [data-ly="hi"],.iso-stage[data-layer="hi"] [data-ly="lo"]{opacity:0;pointer-events:none}
+.iso-stage[data-layer="lo"] .mp-ghost{opacity:.25}
+.iso-stage[data-layer="lo"] .pit-xray{fill-opacity:.08}
+.iso-stage[data-layer="lo"] .pit-water{fill-opacity:.3}
+.iso-stage[data-layer="lo"] .pit-sludge-side{fill-opacity:.4}
+
+/* машины: видны только в слое «верх» */
+.sw-car{display:none}
+.iso-stage[data-layer="hi"] .sw-car{display:inline}
+.sw-car path{vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.car-shadow{fill:#000;fill-opacity:.12}
+.car-face{fill:var(--car);stroke:#0006;stroke-width:.5px}
+.car-side{filter:brightness(.86)}
+.car-rear{filter:brightness(.74)}
+.car-roof{filter:brightness(1.06)}
+.car-glass{fill:#2a3a4c;stroke:#0006;stroke-width:.5px}
+.car-glass-side{fill:#34485e}
+.car-light{fill:#ff4d3d}
+.car-wheel{fill:#1b1c1f;stroke:#55575d;stroke-width:.5px}
+.car-foam{fill:#fff;fill-opacity:0;stroke:none}
+.car-spray{fill:none;stroke:var(--c-water);stroke-width:1.1px;stroke-linecap:round;stroke-dasharray:1.5 2.5;opacity:0}
+@keyframes sw-drive{
+  0%{transform:translate(-61.5px,84.4px);opacity:0}
+  4%{opacity:1}
+  22%{transform:translate(0,0);animation-timing-function:linear}
+  68%{transform:translate(0,0);animation-timing-function:ease-in}
+  86%{transform:translate(-61.5px,84.4px);opacity:1}
+  90%,100%{transform:translate(-61.5px,84.4px);opacity:0}
+}
+@keyframes sw-foam{0%,26%{fill-opacity:0}34%,48%{fill-opacity:.85}56%,100%{fill-opacity:0}}
+@keyframes sw-spray{0%,25%{opacity:0}27%,64%{opacity:1}66%,100%{opacity:0}}
+@keyframes sw-spray-run{to{stroke-dashoffset:-8}}
+@keyframes sw-red{0%,17%{opacity:.18}19%,80%{opacity:1}82%,100%{opacity:.18}}
+@keyframes sw-green{0%,17%{opacity:1}19%,80%{opacity:.18}82%,100%{opacity:1}}
+.sw-car{animation:sw-drive 16s var(--d,0s) infinite ease-out}
+.sw-car .car-foam{animation:sw-foam 16s var(--d,0s) infinite}
+.sw-car .car-spray{animation:sw-spray 16s var(--d,0s) infinite,sw-spray-run .5s linear infinite}
+.iso-stage[data-layer="hi"] .mp-tl[data-c="r"]{animation:sw-red 16s var(--d,0s) infinite}
+.iso-stage[data-layer="hi"] .mp-tl[data-c="g"]{animation:sw-green 16s var(--d,0s) infinite}
+@media (prefers-reduced-motion: reduce){
+  .sw-car,.sw-car *,.iso-stage .mp-tl{animation:none!important}
+  .sw-car .car-foam{fill-opacity:0}
+}
