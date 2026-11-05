@@ -39,7 +39,7 @@ img{max-width:100%}
   .nav{margin-left:0}
 }
 @media print{
-  .topbar,.to-top,.ctl,.fs-ctl,.hero-cta{display:none!important}
+  .topbar,.to-top,.ctl,.hero-cta{display:none!important}
   body{background:#fff}
 }
 
@@ -114,3 +114,68 @@ img{max-width:100%}
   .sw-car,.sw-car *,.iso-stage .mp-tl{animation:none!important}
   .sw-car .car-foam{fill-opacity:0}
 }
+
+/* ===== Просмотрщик схемы: схема на весь экран, кнопки сбоку ===== */
+.page{max-width:1320px}
+.viewer{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 312px;height:calc(100svh - 88px);min-height:540px;max-height:900px;
+  background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-faint),0 18px 40px -28px #0005;border-radius:8px;overflow:hidden;--anatomy-paper:var(--anatomy-card)}
+.vw-main{position:relative;min-width:0;min-height:0;display:flex}
+.vw-main .iso-stage{flex:1;min-width:0;min-height:0;display:flex;cursor:grab;touch-action:pan-y;outline:none}
+.vw-main .iso-stage.is-zoomed{touch-action:none}
+.vw-main .iso-stage.is-dragging{cursor:grabbing}
+.vw-main .iso-stage:focus-visible{box-shadow:inset 0 0 0 2px var(--brand)}
+.vw-main .iso-svg{width:100%;height:100%;overflow:hidden;user-select:none;-webkit-user-select:none}
+.vw-top{position:absolute;left:16px;right:70px;top:12px;display:flex;justify-content:space-between;gap:12px;pointer-events:none;z-index:2;font:500 10.5px/1.3 var(--anatomy-mono);letter-spacing:.06em;color:var(--anatomy-muted)}
+.vw-readout{color:var(--anatomy-strong);text-transform:uppercase;letter-spacing:.12em;white-space:nowrap}
+.vw-zoom{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.vw-zoom button{all:unset;cursor:pointer;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:var(--anatomy-face);color:var(--anatomy-strong);box-shadow:var(--anatomy-lift)}
+.vw-zoom button:hover{color:var(--brand)}
+.vw-zoom button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.vw-zoom svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.vw-hint{position:absolute;left:16px;bottom:12px;z-index:2;pointer-events:none;font:500 10.5px/1.3 var(--anatomy-mono);letter-spacing:.06em;color:var(--anatomy-muted)}
+.vw-side{min-height:0;overflow:auto;padding:18px 18px 20px;border-left:1px solid var(--anatomy-faint);display:flex;flex-direction:column;gap:16px;background:var(--anatomy-card)}
+.vw-group h4{margin:0 0 8px;font:500 10.5px/1 var(--anatomy-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--anatomy-muted)}
+.vw-row{display:flex;flex-wrap:wrap;gap:6px}
+.vw-row .views,.views{margin-left:0}
+.vw-side .chip{font-size:13px;padding:7px 11px}
+.vw-side .path{margin:0;font-size:13.5px}
+.legend-plate{padding:20px 20px 6px;margin-top:16px;border-radius:8px}
+.legend-title{margin:0 0 12px;font:600 18px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--anatomy-strong)}
+.legend-plate .pins{padding:0 0 14px}
+
+/* полноэкранный режим */
+.viewer.is-full{position:fixed;inset:0;z-index:60;height:100svh;max-height:none;min-height:0;border-radius:0;box-shadow:none;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+.vw-lock,.vw-lock body{overflow:hidden}
+.viewer.is-full [data-full]{color:var(--brand)}
+
+@media (max-width:900px){
+  .viewer{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;height:auto;min-height:0;max-height:none}
+  .vw-main{height:clamp(280px,68vw,72svh)}
+  .vw-side{border-left:0;border-top:1px solid var(--anatomy-faint);padding:12px 0 14px;gap:10px}
+  .vw-group{padding:0 12px}
+  .vw-group h4{margin-bottom:6px}
+  .vw-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -12px;padding:0 12px 2px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 18px),transparent)}
+  .vw-row::-webkit-scrollbar{display:none}
+  .vw-row .chip{flex:none;white-space:nowrap}
+  .vw-side .path{margin:0 12px}
+  .vw-hint{display:none}
+  .vw-top{left:12px;top:10px}
+  .vw-fig{display:none}
+  .viewer.is-full{grid-template-rows:minmax(0,1fr) auto}
+  .viewer.is-full .vw-main{height:auto}
+  .viewer.is-full .vw-side{max-height:42svh}
+}
+@media (max-width:560px){
+  .legend-plate{padding:16px 14px 4px}
+  .vw-zoom{right:8px;top:8px;gap:4px}
+  .vw-zoom button{width:34px;height:34px}
+}
+
+/* телефон: высота окна схемы по пропорциям чертежа, кнопки масштаба — строкой снизу */
+@media (max-width:900px){
+  .vw-main{height:calc(min(100vw,900px) * .6 + 46px)}
+  .vw-zoom{top:auto;bottom:8px;right:8px;flex-direction:row}
+  .viewer.is-full .vw-main{height:auto}
+}
+
