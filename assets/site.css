@@ -42,3 +42,25 @@ img{max-width:100%}
   .topbar,.to-top,.ctl,.fs-ctl,.hero-cta{display:none!important}
   body{background:#fff}
 }
+
+/* ===== Приямки 2×2×2 м под боксами (изометрическая схема) ===== */
+.mp-pit path,.mp-pit ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.pit-bot{fill:var(--anatomy-shade-1);stroke:none}
+.pit-back{fill:var(--anatomy-shade-2);stroke:none}
+.pit-left{fill:var(--anatomy-shade-0);stroke:none}
+.pit-xray{fill:var(--anatomy-paper);fill-opacity:.38;stroke:none}
+.pit-rim{fill:var(--anatomy-top);stroke:none}
+.pit-edge{fill:none;stroke:var(--anatomy-mid);stroke-width:.6px}
+.pit-edge-hi{stroke:var(--anatomy-hi)}
+.pit-hid{fill:none;stroke:var(--anatomy-mid);stroke-width:.5px;stroke-dasharray:2 2}
+.pit-rung{fill:none;stroke:var(--anatomy-hi);stroke-width:.7px;stroke-linecap:round}
+.pit-sludge{fill:var(--c-drain);fill-opacity:.5;stroke:none}
+.pit-water{fill:var(--c-drain);fill-opacity:.22;stroke:none}
+.pit-wline{fill:none;stroke:var(--c-drain);stroke-width:.8px}
+.pit-out{fill:var(--anatomy-paper);stroke:var(--c-drain);stroke-width:.8px}
+.pit-fall{stroke:var(--c-drain)!important;stroke-opacity:.9;stroke-width:1px}
+.stage[data-focus="drain"] .pit-sludge{fill-opacity:.75}
+.stage[data-focus="drain"] .pit-water{fill-opacity:.4}
+.pit-sludge-side{fill-opacity:.22}
+.pit-xray{fill-opacity:.22}
+.pit-water{fill-opacity:.14}
